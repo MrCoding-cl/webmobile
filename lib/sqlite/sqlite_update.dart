@@ -3,7 +3,7 @@ import 'package:notesapp/sqlite/sqlite_helper.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SQliteUpdate {
-  Future<void> nota(Nota nota) async {
+  static Future<void> nota(Nota nota) async {
     final Database db = await SQLiteHelper.getDB();
 
     await db

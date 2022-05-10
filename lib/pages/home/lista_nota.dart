@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notesapp/pages/constant/rutas.dart';
+import 'package:notesapp/sqlite/model/nota.dart';
 import 'package:notesapp/sqlite/sqlite_delete.dart';
 import 'package:notesapp/sqlite/sqlite_helper.dart';
 import 'package:notesapp/sqlite/sqlite_query.dart';
@@ -80,6 +81,12 @@ class ListaNota extends StatelessWidget {
           child: ListTile(
             title: Text(sqLiteQuery.nota[index].titulo),
             subtitle: Text(sqLiteQuery.nota[index].descripcion),
+            trailing: ElevatedButton.icon(
+                onPressed: () {
+                  _abrirEditarNota(context, sqLiteQuery.nota[index]);
+                },
+                icon: Icon(Icons.edit),
+                label: Text('Editar')),
           ),
         );
       },
@@ -88,6 +95,13 @@ class ListaNota extends StatelessWidget {
 
   void _abrirAnadirNota(BuildContext context) {
     Navigator.pushNamed(context, Rutas.anadirNota).then((value) {
+      Provider.of<SQliteQuery>(context, listen: false).updateNotas();
+    });
+  }
+
+  void _abrirEditarNota(BuildContext context, Nota nota) {
+    Navigator.pushNamed(context, Rutas.editarNota, arguments: nota)
+        .then((value) {
       Provider.of<SQliteQuery>(context, listen: false).updateNotas();
     });
   }
