@@ -1,5 +1,5 @@
 class Rutas {
-  static const String home = '/';
+  static String home = '/';
 
-  static const String anadirNota = '/anadir-nota';
+  static String anadirNota = '/anadir-nota';
 }
