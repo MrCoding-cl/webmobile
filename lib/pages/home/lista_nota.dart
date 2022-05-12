@@ -6,8 +6,28 @@ import 'package:notesapp/sqlite/sqlite_helper.dart';
 import 'package:notesapp/sqlite/sqlite_query.dart';
 import 'package:provider/provider.dart';
 
-class ListaNota extends StatelessWidget {
-  const ListaNota({Key? key}) : super(key: key);
+class ListaNota extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _ListaNotaState();
+}
+
+class _ListaNotaState extends State<ListaNota> {
+  @override
+  void initState() {
+    super.initState();
+    _loadProviderData();
+  }
+
+  Future<void> _loadProviderData() async {
+    final SQliteQuery sqliteQuery =
+        Provider.of<SQliteQuery>(context, listen: false);
+    await _delayed(true, Duration(milliseconds: 500));
+    sqliteQuery.updateNotas();
+  }
+
+  Future<dynamic> _delayed(dynamic returVal, Duration duration) {
+    return Future.delayed(duration, () => returVal);
+  }
 
   @override
   Widget build(BuildContext context) {

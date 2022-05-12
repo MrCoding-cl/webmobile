@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         // initialRoute: Rutas.home,
         initialRoute: Rutas.login,
         routes: {
-          Rutas.home: (BuildContext context) => const ListaNota(),
+          Rutas.home: (BuildContext context) => ListaNota(),
           Rutas.anadirNota: (BuildContext context) => const AnadirNota(),
           Rutas.editarNota: (BuildContext context) => const EditarNota(),
           Rutas.login: (BuildContext context) => LoginPage(),
