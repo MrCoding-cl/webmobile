@@ -32,96 +32,99 @@ class __LoginScreenState extends State<_LoginScreen> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Login',
-              style: TextStyle(fontSize: 30),
-            ),
-            const SizedBox(height: 20),
-            Image(
-                image: NetworkImage(
-                    'https://uft.cl/images/la_universidad/imagen-corporativa/Institucional/Logo_FINIS_institucional.png')),
-            const SizedBox(height: 20),
-            SizedBox(
-              height: 44,
-            ),
-            TextFormField(
-              controller: _controllerEmail,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: 'Email',
-                prefixIcon: Icon(Icons.email),
-              ),
-              validator: (String? value) {
-                if (value!.isEmpty) {
-                  return 'Por favor agrega una pass';
-                }
-                return null;
-              },
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-              controller: _controllerPassword,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                prefixIcon: Icon(Icons.lock),
-              ),
-              validator: (String? value) {
-                if (value!.isEmpty) {
-                  return 'Por favor agrega una pass';
-                }
-                return null;
-              },
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Center(
-                child: ElevatedButton(
-              onPressed: () async {
-                // final message = await AuthService().login(
-                //   email: _controllerEmail.text,
-                //   password: _controllerPassword.text,
-                // );
-                final message = 'true';
-                if (message == 'true') {
-                  // if (message!.contains('true')) {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => ListaNota(),
-                    ),
-                  );
-                }
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Usuario no valido'),
+      child: Form(
+          key: _formKey,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Login',
+                  style: TextStyle(fontSize: 30),
+                ),
+                const SizedBox(height: 20),
+                Image(
+                    image: NetworkImage(
+                        'https://uft.cl/images/la_universidad/imagen-corporativa/Institucional/Logo_FINIS_institucional.png')),
+                const SizedBox(height: 20),
+                SizedBox(
+                  height: 44,
+                ),
+                TextFormField(
+                  controller: _controllerEmail,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                    prefixIcon: Icon(Icons.email),
                   ),
-                );
-              },
-              child: const Text('Login'),
-            )),
-            SizedBox(
-              height: 10,
-            ),
-            Center(
-              child: Text('O'),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Center(
-                child: ElevatedButton(
-              child: Text('Registro'),
-              onPressed: () => Navigator.pushNamed(context, '/register'),
-              // onPressed: _submitCommand,
-            )),
-          ]),
+                  validator: (String? value) {
+                    if (value!.isEmpty) {
+                      return 'Por favor agrega una pass';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: _controllerPassword,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    prefixIcon: Icon(Icons.lock),
+                  ),
+                  validator: (String? value) {
+                    if (value!.isEmpty) {
+                      return 'Por favor agrega una pass';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Center(
+                    child: ElevatedButton(
+                  onPressed: () async {
+                    // final message = await AuthService().login(
+                    //   email: _controllerEmail.text,
+                    //   password: _controllerPassword.text,
+                    // );
+                    final message = 'dfssdf';
+                    if (message == 'true') {
+                      // if (message!.contains('true')) {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => ListaNota(),
+                        ),
+                      );
+                    } else if (message != "true") {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Usuario no valido'),
+                        ),
+                      );
+                    }
+                  },
+                  child: const Text('Login'),
+                )),
+                SizedBox(
+                  height: 10,
+                ),
+                Center(
+                  child: Text('O'),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Center(
+                    child: ElevatedButton(
+                  child: Text('Registro'),
+                  onPressed: () => Navigator.pushNamed(context, '/register'),
+                  // onPressed: _submitCommand,
+                )),
+              ])),
     );
   }
 }
