@@ -6,6 +6,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: _LoginScreen(),
     );
   }
@@ -19,6 +20,12 @@ class _LoginScreen extends StatefulWidget {
 }
 
 class __LoginScreenState extends State<_LoginScreen> {
+  final TextEditingController _controllerEmail = TextEditingController();
+
+  final TextEditingController _controllerPassword = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,7 +46,8 @@ class __LoginScreenState extends State<_LoginScreen> {
             SizedBox(
               height: 44,
             ),
-            TextField(
+            TextFormField(
+              controller: _controllerEmail,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 labelText: 'Email',
@@ -49,7 +57,8 @@ class __LoginScreenState extends State<_LoginScreen> {
             SizedBox(
               height: 20,
             ),
-            TextField(
+            TextFormField(
+              controller: _controllerPassword,
               obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Password',
@@ -65,13 +74,13 @@ class __LoginScreenState extends State<_LoginScreen> {
               onPressed: () => Navigator.pushNamed(context, '/'),
             )),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             Center(
-              child: Text('Or'),
+              child: Text('O'),
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             Center(
                 child: ElevatedButton(
