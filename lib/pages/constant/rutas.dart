@@ -4,4 +4,6 @@ class Rutas {
   static String anadirNota = '/anadir-nota';
 
   static String editarNota = '/editar-nota';
+
+  static String login = '/login';
 }
