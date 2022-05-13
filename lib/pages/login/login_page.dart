@@ -1,6 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:email_validator/email_validator.dart';
 import 'package:notesapp/pages/home/lista_nota.dart';
 
@@ -87,13 +90,13 @@ class __LoginScreenState extends State<_LoginScreen> {
                 Center(
                     child: ElevatedButton(
                   onPressed: () async {
-                    // final message = await AuthService().login(
-                    //   email: _controllerEmail.text,
-                    //   password: _controllerPassword.text,
-                    // );
-                    final message = 'dfssdf';
+                    final message = await AuthService().login(
+                      email: _controllerEmail.text,
+                      password: _controllerPassword.text,
+                    );
+                    // final message = 'dfssdf';
                     if (message == 'true') {
-                      // if (message!.contains('true')) {
+                      // if (message!.contains('provider')) {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => ListaNota(),
@@ -131,6 +134,25 @@ class __LoginScreenState extends State<_LoginScreen> {
 
 class AuthService {
   login({required String email, required String password}) async {
-    //Fetch data from the server
+    var response = await http.post(
+        Uri(
+          scheme: 'https',
+          host: 'arcane-refuge-59957.herokuapp.com',
+          path: '/api/auth/local',
+        ),
+        body: {
+          "identifier": email,
+          "password": password,
+        });
+
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+
+      if (jsonResponse['jwt'].isNotEmpty) {
+        return "true";
+      }
+    } else {
+      return 'NO';
+    }
   }
 }
